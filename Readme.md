@@ -32,36 +32,13 @@ Karma Path is an interactive web application designed to explore the intricate w
     * Sends the selected Event ID back to the appropriate Flask endpoint.
     * Receives the Mermaid code and renders it using the Mermaid.js library.
 
-## Screenshots
-
-*(**Instructions:** Replace the bracketed text below with Markdown image links. Upload your screenshots to a service like GitHub or Imgur and use the generated links.)*
-
-**1. Main Interface:** Shows the input field, trace type selection, and general layout.
-`[SCREENSHOT_MAIN_UI]`
-*(Example: ![Main UI](URL_TO_YOUR_MAIN_UI_SCREENSHOT.png))*
-
-
-**2. Disambiguation:** Shows the application presenting multiple choices for an ambiguous query.
-`[SCREENSHOT_DISAMBIGUATION]`
-*(Example: ![Disambiguation](URL_TO_YOUR_DISAMBIGUATION_SCREENSHOT.png))*
-[Image showing the disambiguation choices presented to the user]
-
-**3. Causes Flowchart Example:** A sample flowchart generated for a "What led to..." query.
-`[SCREENSHOT_CAUSES_FLOWCHART]`
-*(Example: ![Causes Example](URL_TO_YOUR_CAUSES_SCREENSHOT.png))*
-
-
-**4. Consequences Flowchart Example:** A sample flowchart generated for a "What happened after..." query.
-`[SCREENSHOT_CONSEQUENCES_FLOWCHART]`
-*(Example: ![Consequences Example](URL_TO_YOUR_CONSEQUENCES_SCREENSHOT.png))*
-
 
 ## Setup and Installation
 
 1.  **Clone the Repository:**
     ```bash
-    git clone <your-repo-url>
-    cd <your-repo-folder-name>
+    git clone <https://github.com/abhiinavjain/Karma_Path>
+    cd <Karma_Path>
     ```
 2.  **Create a Virtual Environment (Recommended):**
     ```bash
@@ -95,7 +72,7 @@ Karma Path is an interactive web application designed to explore the intricate w
 
 ## Data Source
 
-The event mapping and relationships were derived from summaries of the Adi Parva, Sabha Parva, and Vana Parva of the Mahabharata. *(You can add more detail here about the specific translation or source text used)*.
+The event mapping and relationships were derived from summaries of the Adi Parva, Sabha Parva, and Vana Parva of the Mahabharata. 
 
 ## Future Enhancements
 
