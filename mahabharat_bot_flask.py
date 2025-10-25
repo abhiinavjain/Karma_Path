@@ -333,6 +333,11 @@ def generate_mermaid_code(start_or_target_event_id, start_or_target_label, nodes
 def index():
     return render_template('index.html')
 
+
+@app.route('/family-tree')
+def family_tree():
+    return render_template('family-tree.html')
+
 # --- REVISED Route for initial query using TF-IDF ---
 @app.route('/find_event_matches', methods=['POST'])
 def find_event_matches():

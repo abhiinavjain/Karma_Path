@@ -3,89 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahabharata Consequences Flowchart</title>
-    <!-- Tailwind CSS -->
+    <title>Karma Path: Mahabharata Event Visualizer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Mermaid JS -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        /* Custom Fonts */
+        body { font-family: 'Noto Serif', serif; } /* For body text, more readable */
+        h1, h2, h3, .font-cinzel { font-family: 'Cinzel', serif; } /* For headings, more epic/regal */
+
+        /* Thematic Background with subtle pattern */
+        body {
+            background-color: #f7ede2; /* A warm, parchment-like base */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e0d8cc' fill-opacity='0.4'%3E%3Cpath d='M30 15c0 5.523 4.477 10 10 10 0 5.523 4.477 10 10 10s10-4.477 10-10-4.477-10-10-10c0-5.523-4.477-10-10-10S30 4.477 30 10c0 5.523-4.477 10-10 10-5.523 0-10 4.477-10 10s4.477 10 10 10c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10C34.477 25 30 20.523 30 15z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Loader Animation */
         .loader {
-            border: 4px solid #f3f3f3; border-top: 4px solid #4f46e5;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #b74f00; /* Deep gold/ochre */
             border-radius: 50%; width: 30px; height: 30px;
             animation: spin 1s linear infinite; margin: 20px auto;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Mermaid Styles */
         .mermaid { display: flex; justify-content: center; }
         .mermaid svg { max-width: 100%; height: auto; }
-        /* Style for choice buttons */
+
+        /* Custom Choice Button Styles */
         .choice-button {
             display: block; width: 100%; text-align: left;
             padding: 0.75rem 1rem; margin-bottom: 0.5rem;
-            border: 1px solid #d1d5db; border-radius: 0.5rem;
-            background-color: #f9fafb; color: #374151;
+            border: 1px solid #c9b19e; /* Muted border */
+            border-radius: 0.375rem; /* Slightly smaller radius */
+            background-color: #fcf6e8; /* Lighter parchment */
+            color: #5a4b3f; /* Darker text */
             transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* Subtle shadow */
         }
-        .choice-button:hover { background-color: #e5e7eb; border-color: #9ca3af; }
-        .choice-button strong { color: #1f2937; }
+        .choice-button:hover {
+            background-color: #f0ead6; /* Slightly darker on hover */
+            border-color: #a08c78; /* More prominent border on hover */
+            color: #4a3e33;
+        }
+        .choice-button strong { color: #8d4f01; font-family: 'Cinzel', serif; } /* Highlight ID */
+        .choice-button i { color: #7a6a5a; font-size: 0.9em; } /* Score text */
+
+        /* Thematic Scrollbar (Optional, for modern browsers) */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: #f7ede2; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #b74f00; border-radius: 10px; border: 2px solid #f7ede2; }
+        ::-webkit-scrollbar-thumb:hover { background: #8d4f01; }
     </style>
 </head>
-<body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 min-h-screen p-4 md:p-8">
-    <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-10">
-        <h1 class="text-3xl font-bold text-center text-indigo-800 mb-4">Mahabharata Consequences Flowchart</h1>
-        <p class="text-gray-600 text-center mb-8">Select trace type and ask about a specific event.</p>
+<body class="min-h-screen p-4 md:p-8">
+    <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-2xl p-6 md:p-10 border border-gray-200"> <div class="flex flex-col sm:flex-row justify-between items-center mb-4">
+        <a href="/" class="text-4xl font-bold text-center text-[#8d4f01] font-cinzel hover:text-[#b74f00] transition duration-200">
+            Karma Path: Mahabharata Event Visualizer
+        </a>
+        <a href="/family-tree" 
+           class="bg-white border border-[#b74f00] text-[#b74f00] hover:bg-[#fcf6e8] font-cinzel font-semibold py-2 px-6 rounded-lg transition duration-200 ease-in-out shadow-sm
+                  focus:outline-none focus:ring-2 focus:ring-[#b74f00] focus:ring-offset-2 text-lg uppercase tracking-wide mt-4 sm:mt-0">
+            Family Tree
+        </a>
+        </div>
+    
+        <p class="text-gray-700 text-center mb-8 text-lg">Unravel the tapestry of cause and consequence in the Great Epic.</p>
 
-        <!-- Trace Type Selection -->
-        <div class="mb-6 text-center">
-            <label class="text-lg font-semibold text-gray-700 mr-4">Trace Type:</label>
-            <input type="radio" id="traceCauses" name="traceType" value="causes" class="mr-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300" checked>
-            <label for="traceCauses" class="mr-4 text-lg text-gray-600">Causes (What led to...)</label>
-            <input type="radio" id="traceConsequences" name="traceType" value="consequences" class="mr-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300">
-            <label for="traceConsequences" class="text-lg text-gray-600">Consequences (What happened after...)</label>
+        <div class="mb-6 text-center bg-gray-50 p-4 rounded-lg shadow-inner border border-gray-100">
+            <label class="text-xl font-semibold text-[#6a402a] mr-4 font-cinzel">Trace Type:</label>
+            <input type="radio" id="traceCauses" name="traceType" value="causes" class="mr-1 h-5 w-5 text-[#b74f00] focus:ring-[#8d4f01] border-gray-300" checked>
+            <label for="traceCauses" class="mr-6 text-lg text-gray-700">Causes (What led to...)</label>
+            <input type="radio" id="traceConsequences" name="traceType" value="consequences" class="mr-1 h-5 w-5 text-[#b74f00] focus:ring-[#8d4f01] border-gray-300">
+            <label for="traceConsequences" class="text-lg text-gray-700">Consequences (What happened after...)</label>
         </div>
 
-        <!-- Input Form -->
-        <div class="flex flex-col sm:flex-row gap-3 mb-8">
-            <input type="text" id="questionInput" placeholder="e.g., What led to the game of dice?" class="flex-grow p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition duration-150 ease-in-out text-lg" autofocus>
-            <button id="generateButton" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-150 ease-in-out shadow focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-lg">
+        <div class="flex flex-col sm:flex-row gap-4 mb-8">
+            <input type="text" id="questionInput" placeholder="e.g., What led to the game of dice?"
+                   class="flex-grow p-4 border border-gray-300 rounded-lg text-lg
+                          focus:ring-2 focus:ring-[#b74f00] focus:border-transparent outline-none
+                          transition duration-150 ease-in-out text-gray-800 bg-gray-50 shadow-sm" autofocus>
+            <button id="generateButton"
+                    class="bg-[#b74f00] hover:bg-[#8d4f01] text-white font-cinzel font-semibold py-4 px-8 rounded-lg
+                           transition duration-200 ease-in-out shadow-md hover:shadow-lg
+                           focus:outline-none focus:ring-2 focus:ring-[#b74f00] focus:ring-offset-2
+                           text-xl uppercase tracking-wide">
                 Find Event
             </button>
         </div>
 
-        <!-- Result/Loading/Error/Disambiguation Area -->
-        <div id="resultArea" class="mt-8 min-h-[300px]">
-            <div id="loadingIndicator" class="hidden text-center">
-                 <div class="loader"></div>
-                 <p class="text-gray-500">Processing...</p> <!-- Generic message -->
+        <div id="resultArea" class="mt-8 min-h-[300px] relative">
+            <div id="loadingIndicator" class="hidden absolute inset-0 bg-white bg-opacity-80 flex flex-col justify-center items-center rounded-lg z-10">
+                <div class="loader"></div>
+                <p class="text-gray-600 text-lg mt-3">Consulting the ancient texts...</p>
             </div>
-            <div id="errorMessage" class="hidden p-4 bg-red-100 text-red-700 border border-red-300 rounded-lg text-center font-medium"></div>
+            <div id="errorMessage" class="hidden p-4 bg-red-100 text-red-700 border border-red-300 rounded-lg text-center font-medium shadow-md"></div>
 
-            <!-- NEW: Disambiguation Area -->
-            <div id="disambiguationArea" class="hidden bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                <h3 class="text-xl font-semibold text-center text-yellow-800 mb-4">Did you mean one of these?</h3>
-                <p class="text-center text-yellow-700 mb-4">Multiple events matched your query. Please select the correct one:</p>
-                <div id="choicesList">
-                    <!-- Choice buttons will be added here by JavaScript -->
-                </div>
+            <div id="disambiguationArea" class="hidden bg-yellow-50 border border-yellow-300 rounded-lg p-6 shadow-md">
+                <h3 class="text-2xl font-semibold text-center text-yellow-800 mb-5 font-cinzel">Did you mean one of these?</h3>
+                <p class="text-center text-yellow-700 mb-5 text-lg">Your query matched multiple events. Please select the precise thread of karma:</p>
+                <div id="choicesList" class="space-y-3">
+                    </div>
             </div>
 
-            <!-- Flowchart Area -->
-            <div id="flowchartContainer" class="hidden bg-gray-50 border border-gray-200 rounded-lg p-4 mt-4 overflow-x-auto">
-                 <h2 id="originalQuestion" class="text-lg font-medium text-center text-gray-500 mb-2"></h2>
-                 <h3 id="chartTitle" class="text-xl font-semibold text-center text-gray-800 mb-4"></h3>
-                 <div id="mermaidChart" class="mermaid">
-                    <!-- Mermaid chart rendered here -->
-                </div>
+            <div id="flowchartContainer" class="hidden bg-gray-50 border border-gray-200 rounded-lg p-6 mt-4 overflow-x-auto shadow-md">
+                <h2 id="originalQuestion" class="text-lg font-medium text-center text-gray-500 mb-2"></h2>
+                <h3 id="chartTitle" class="text-2xl font-semibold text-center text-[#6a402a] mb-5 font-cinzel"></h3>
+                <div id="mermaidChart" class="mermaid bg-white p-4 rounded-lg shadow-inner border border-gray-100">
+                    </div>
             </div>
         </div>
     </div>
 
     <script>
-        mermaid.initialize({ startOnLoad: false, theme: 'base', securityLevel: 'loose' });
+        // Initialize Mermaid with custom theme for better integration
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base', // Using 'base' and applying custom styles via CSS classes
+            securityLevel: 'loose',
+            flowchart: {
+                htmlLabels: true, // Allow HTML in labels for better styling
+                curve: 'basis' // Smooth curves
+            }
+        });
 
         // Get references to UI elements
         const questionInput = document.getElementById('questionInput');
@@ -109,13 +152,13 @@
             currentTraceType = document.querySelector('input[name="traceType"]:checked').value; // Store trace type
 
             if (!currentQuery) {
-                showError("Please enter an event description.");
+                showError("Please enter an event description to trace its path.");
                 return;
             }
 
             hideError(); hideDisambiguation(); hideFlowchart(); showLoading();
             generateButton.disabled = true;
-            loadingIndicator.querySelector('p').textContent = "Finding matching events..."; // Update loading text
+            loadingIndicator.querySelector('p').textContent = "Consulting the ancient texts for matches..."; // Update loading text
 
             try {
                 // Send query to the new matching endpoint
@@ -127,7 +170,7 @@
                 const data = await response.json();
 
                 if (!response.ok) {
-                    showError(data.error || 'Unknown server error during matching.');
+                    showError(data.error || 'The threads of fate seem tangled. Unknown server error during matching.');
                     return;
                 }
 
@@ -139,12 +182,12 @@
                     // Multiple choices found, display them
                     displayChoices(data.choices);
                 } else {
-                    showError(data.error || 'Unexpected response from server.');
+                    showError(data.error || 'An unexpected omen appeared. Unexpected response from server.');
                 }
 
             } catch (error) {
                 console.error("Error finding matches:", error);
-                showError(`Failed to connect or process request: ${error.message}`);
+                showError(`The connection to the past is weak. Failed to connect or process request: ${error.message}`);
             } finally {
                 hideLoading(); generateButton.disabled = false;
             }
@@ -154,7 +197,7 @@
         function displayChoices(choices) {
             choicesList.innerHTML = ''; // Clear previous choices
             if (!choices || choices.length === 0) {
-                showError("No matches found, even for disambiguation.");
+                showError("No threads of karma found, even for disambiguation. Try a different query.");
                 return;
             }
             choices.forEach(choice => {
@@ -163,7 +206,7 @@
                 // Use dataset attributes to store info needed for the next step
                 button.dataset.eventId = choice.id;
                 button.dataset.eventLabel = choice.label;
-                button.innerHTML = `<strong>[${choice.id}]</strong> ${choice.label} <i>(Score: ${choice.score})</i>`;
+                button.innerHTML = `<strong>[${choice.id}]</strong> ${choice.label} <i>(Match Score: ${choice.score})</i>`;
                 // Add event listener to handle click
                 button.addEventListener('click', handleChoiceClick);
                 choicesList.appendChild(button);
@@ -178,10 +221,10 @@
             // const eventLabel = button.dataset.eventLabel; // Not strictly needed for backend
 
             hideDisambiguation(); showLoading();
-            loadingIndicator.querySelector('p').textContent = "Generating flowchart..."; // Update loading text
+            loadingIndicator.querySelector('p').textContent = "Weaving the Karma Path into a visual tale..."; // Update loading text
 
             try {
-                 // Send the CHOSEN event ID to the specific backend endpoint
+                // Send the CHOSEN event ID to the specific backend endpoint
                 const endpoint = (currentTraceType === 'consequences') ? '/get_consequences_by_id' : '/get_flowchart_by_id';
                 const response = await fetch(endpoint, { // Use new endpoint
                     method: 'POST',
@@ -195,45 +238,44 @@
                 const data = await response.json();
 
                 if (!response.ok) {
-                    showError(data.error || 'Unknown server error generating flowchart by ID.');
+                    showError(data.error || 'The loom of causality broke. Unknown server error generating flowchart by ID.');
                     return;
                 }
                 if (data.status === 'success') {
                     renderFlowchart(data);
                 } else {
-                     showError(data.error || 'Unexpected response from server after choosing ID.');
+                    showError(data.error || 'The cosmic dance paused. Unexpected response from server after choosing ID.');
                 }
 
             } catch (error) {
                 console.error("Error generating flowchart by ID:", error);
-                showError(`Failed to connect or process request: ${error.message}`);
+                showError(`The threads are lost. Failed to connect or process request: ${error.message}`);
             } finally {
-                 hideLoading();
+                hideLoading();
             }
-
         }
 
 
         // --- NEW: Function to Render the Final Flowchart ---
         async function renderFlowchart(data) {
-             const titlePrefix = (data.trace_type === 'consequences') ? 'Consequences of' : 'What led to';
-             originalQuestionTitle.textContent = `Your Query: "${data.user_question}" (Tracing ${data.trace_type})`;
-             chartTitle.textContent = `Flowchart: ${titlePrefix} "${data.target_label}"?`;
+            const titlePrefix = (data.trace_type === 'consequences') ? 'Consequences of' : 'What led to';
+            originalQuestionTitle.textContent = `Your Query: "${data.user_question}" (Tracing ${data.trace_type})`;
+            chartTitle.textContent = `Flowchart: ${titlePrefix} "${data.target_label}"?`;
 
-             mermaidChartDiv.innerHTML = '';
-             mermaidChartDiv.removeAttribute('data-processed');
+            mermaidChartDiv.innerHTML = '';
+            mermaidChartDiv.removeAttribute('data-processed');
 
-             try {
-                  const { svg } = await mermaid.render('mermaid-graph-' + Date.now(), data.mermaid_code);
-                  mermaidChartDiv.innerHTML = svg;
-                  showFlowchart();
-             } catch(renderError) {
-                  console.error("Mermaid rendering error:", renderError);
-                  // Attempt to show Mermaid's error message if available
-                  mermaidChartDiv.innerHTML = `<pre class="text-red-600 p-4 bg-red-50 rounded">Error rendering flowchart:\n${renderError.str || renderError.message}</pre>`;
-                  showFlowchart(); // Show the container even with error message
-                  // Don't call showError as it would hide the container
-             }
+            try {
+                const { svg } = await mermaid.render('mermaid-graph-' + Date.now(), data.mermaid_code);
+                mermaidChartDiv.innerHTML = svg;
+                showFlowchart();
+            } catch(renderError) {
+                console.error("Mermaid rendering error:", renderError);
+                // Attempt to show Mermaid's error message if available
+                mermaidChartDiv.innerHTML = `<pre class="text-red-600 p-4 bg-red-50 rounded">Error rendering the Karma Path flowchart:\n${renderError.str || renderError.message}</pre>`;
+                showFlowchart(); // Show the container even with error message
+                // Don't call showError as it would hide the container
+            }
         }
 
 
@@ -258,11 +300,14 @@
             if (event.key === 'Enter') { event.preventDefault(); findMatches(); }
         });
 
-        // Update placeholder text when radio button changes
+        // Update placeholder text and clear results area when radio button changes
         document.querySelectorAll('input[name="traceType"]').forEach(radio => {
             radio.addEventListener('change', function() {
-                const placeholderText = (this.value === 'consequences') ? 'e.g., Consequences of the game of dice' : 'e.g., What led to the game of dice?';
+                const placeholderText = (this.value === 'consequences') ? 'e.g., What happened after Arjuna pierced the fish eye?' : 'e.g., What led to born of Ghatotkacha ?';
                 questionInput.placeholder = placeholderText;
+                // Clear previous results when trace type changes
+                hideError(); hideDisambiguation(); hideFlowchart();
+                questionInput.value = ""; // Clear input for fresh query
             });
         });
 
