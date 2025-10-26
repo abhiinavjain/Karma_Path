@@ -7,6 +7,10 @@ Karma Path is an interactive web application designed to explore the intricate w
 ## Images
 
 ### Consequences 
+<img width="1002" height="607" alt="image" src="https://github.com/user-attachments/assets/9992147a-7757-448d-a98a-35f133374ee7" />
+
+## Cause 
+<img width="511" height="603" alt="Cause" src="https://github.com/user-attachments/assets/9642e4a6-addd-4980-8b1f-5e8ab5c1f4c9" />
 
 
 
