@@ -1,28 +1,22 @@
 import csv
-# from thefuzz import fuzz, process # REMOVED thefuzz
 import os
 import sys
 from flask import Flask, render_template, request, jsonify
-# --- NEW IMPORTS ---
 from sentence_transformers import SentenceTransformer, util
-import torch # Or import tensorflow as tf, depending on your install
+import torch 
 import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity # Still useful, though util.cos_sim can also be used
-# --- END NEW IMPORTS ---
+from sklearn.metrics.pairwise import cosine_similarity 
 
-# --- Flask App Initialization ---
 app = Flask(__name__)
 
-# --- Global variables ---
 all_nodes = []
 all_links = []
-# --- NEW: Globals for Semantic Search ---
 embedding_model = None
-event_label_embeddings = None # Will store the computed embeddings
-event_labels_list = []      # List of labels corresponding to embeddings
-node_list_for_semantic = [] # List of nodes corresponding to embeddings
+event_label_embeddings = None 
+event_labels_list = []      
+node_list_for_semantic = [] 
 
-# --- Helper function: Get Parva prefix ---
+# It gives the parva of which the event is sab62- > sab 
 def get_prefix(event_id):
     prefix = ""; event_id_str = str(event_id)
     for char in event_id_str:
@@ -30,7 +24,7 @@ def get_prefix(event_id):
         else: break
     return prefix
 
-# --- REVISED Data Loading (Includes Embedding Pre-computation) ---
+# It opens events.csv and relationships.csv, reads them row by row, and populates the global all_nodes and all_links lists.
 def load_data_and_embeddings():
     """Loads CSV data AND pre-computes sentence embeddings for labels."""
     global all_nodes, all_links, embedding_model, event_label_embeddings, event_labels_list, node_list_for_semantic
@@ -86,14 +80,14 @@ def load_data_and_embeddings():
         return True
     except Exception as e: print(f"--- FATAL ERROR loading data/embeddings: {e} ---"); import traceback; traceback.print_exc(); return False
 
-# --- Helper: Get event details ---
+# Searches the all_nodes list for a specific Event_ID and returns that event's full dictionary (e.g., {'Event_ID': 'sab62', 'Event_Label': '...'}).
 def get_event_from_id(event_id):
     """Finds and returns the full event dictionary using its ID."""
-    # This remains efficient as all_nodes is a list
+    
     return next((node for node in all_nodes if node.get('Event_ID') == event_id), None)
 
 # --- REVISED Matching Function using Semantic Similarity ---
-def find_candidate_matches_semantic(query, threshold=50, limit=5):
+def find_candidate_matches_semantic(query, threshold=40, limit=5):
     """
     Finds potential event matches using Sentence Embedding Cosine Similarity.
     Threshold is 0-100 scale (converted from cosine similarity 0-1).
@@ -300,6 +294,7 @@ def generate_mermaid_code(start_or_target_event_id, start_or_target_label, nodes
 
         code += node_definition + "\n"
         code += node_class_application + "\n"
+        code += f'    click {event_id} call handleNodeClick("{event_id}")\n'
 
 
     code += "\n    %% --- The Connections ---\n"
@@ -352,7 +347,7 @@ def find_event_matches():
         if not user_question: return jsonify({'error': 'No question provided.'}), 400
 
         # Use the TF-IDF candidate finder
-        CANDIDATE_THRESHOLD = 45 # Lower threshold for semantic similarity (0-100 scale)
+        CANDIDATE_THRESHOLD = 30 # Lower threshold for semantic similarity (0-100 scale)
         DIRECT_THRESHOLD = 75    # Threshold to proceed directly (0-100 scale)
         print(f"[DEBUG] Finding semantic candidates with threshold >= {CANDIDATE_THRESHOLD}...")
         # find_candidate_matches_semantic expects threshold 0-100
