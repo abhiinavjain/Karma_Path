@@ -48,7 +48,7 @@ var (
 	templates       *template.Template   // HTML templates
 
 	// URL for the Python NLP service
-	nlpServiceURL = "http://127.0.0.1:5001/encode"
+	nlpServiceURL = os.Getenv("nlp_url")
 )
 
 // --- Helper: Get Parva prefix ---
@@ -833,6 +833,11 @@ func main() {
 	// Load all data into globals at startup
 	if err := loadData(); err != nil {
 		log.Fatalf("--- Exiting due to data loading failure: %v ---", err)
+	}
+
+	if nlpServiceURL == "" {
+		log.Println("[Warning] NLP_SERVICE_URL env variable not set. Defaulting to local http://127.0.0.1:5001/encode")
+		nlpServiceURL = "http://127.0.0.1:5001/encode"
 	}
 
 	// Define HTTP routes
